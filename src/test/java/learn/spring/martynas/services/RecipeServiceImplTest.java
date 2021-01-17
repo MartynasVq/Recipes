@@ -1,5 +1,7 @@
 package learn.spring.martynas.services;
 
+import learn.spring.martynas.converters.RecipeCommandToRecipe;
+import learn.spring.martynas.converters.RecipeToRecipeCommand;
 import learn.spring.martynas.domain.Recipe;
 import learn.spring.martynas.repositories.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,11 +21,16 @@ class RecipeServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test
