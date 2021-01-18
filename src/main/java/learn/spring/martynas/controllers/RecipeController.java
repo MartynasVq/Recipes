@@ -43,7 +43,7 @@ public class RecipeController {
         return "recipe/recipeform";
     }
 
-    @RequestMapping("recipe/{id}/delete")
+    @RequestMapping("/recipe/{id}/delete")
     public String deleteRecipe(@PathVariable String id) {
         recipeService.deleteById(Long.valueOf(id));
 
