@@ -45,7 +45,6 @@ public class ImageController {
     @GetMapping("recipe/{id}/recipeimage")
     public void renderImage(@PathVariable String id, HttpServletResponse http) throws IOException {
         RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(id));
-        http.
         if(recipeCommand.getImage() == null)
             return;
         byte[] array = new byte[recipeCommand.getImage().length];
