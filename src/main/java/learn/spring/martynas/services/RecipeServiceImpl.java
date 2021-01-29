@@ -4,6 +4,7 @@ import learn.spring.martynas.commands.RecipeCommand;
 import learn.spring.martynas.converters.RecipeCommandToRecipe;
 import learn.spring.martynas.converters.RecipeToRecipeCommand;
 import learn.spring.martynas.domain.Recipe;
+import learn.spring.martynas.exceptions.NotFoundException;
 import learn.spring.martynas.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -35,14 +36,13 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe findById(Long id) {
+    public Recipe findById(Long id){
         Optional<Recipe> recipeOptional = recipeRepository.findById(id);
-
-        if(recipeOptional.isPresent()) {
-            return recipeOptional.get();
-        } else {
-            throw new RuntimeException("Recipe not present.");
+        if(!recipeOptional.isPresent()) {
+            throw new NotFoundException("Recipe not present.");
         }
+
+        return recipeOptional.get();
 
     }
 
@@ -62,6 +62,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+
     public void deleteById(Long l) {
         recipeRepository.deleteById(l);
     }
