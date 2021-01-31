@@ -1,10 +1,12 @@
 package learn.spring.martynas.controllers;
 
 import learn.spring.martynas.commands.RecipeCommand;
+import learn.spring.martynas.exceptions.NotFoundException;
 import learn.spring.martynas.services.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class RecipeController {
@@ -49,5 +51,13 @@ public class RecipeController {
 
         return "redirect:/index";
     }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView handleNotFound() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("404");
+        return mav;
+    }
+
 
 }
